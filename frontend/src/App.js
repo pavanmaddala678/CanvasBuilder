@@ -7,7 +7,7 @@ function App() {
   const previewRef = useRef(null);
 
   const initCanvas = async () => {
-    const res = await axios.post('http://localhost:3000/api/canvas/init', dimensions);
+    const res = await axios.post('https://canvas-builder-theta.vercel.app/api/canvas/init', dimensions);
     setCanvasId(res.data.id);
 
     const ctx = previewRef.current.getContext('2d');
@@ -18,7 +18,7 @@ function App() {
 
   const addRectangle = async () => {
     const data = { x: 50, y: 50, width: 100, height: 60, color: 'red', isFilled: true };
-    await axios.post(`http://localhost:3000/api/canvas/${canvasId}/add/rectangle`, data);
+    await axios.post(`https://canvas-builder-theta.vercel.app/api/canvas/${canvasId}/add/rectangle`, data);
     const ctx = previewRef.current.getContext('2d');
     ctx.fillStyle = data.color;
     ctx.fillRect(data.x, data.y, data.width, data.height);
@@ -26,7 +26,7 @@ function App() {
 
   const addCircle = async () => {
     const data = { x: 200, y: 200, radius: 50, color: 'blue', isFilled: true };
-    await axios.post(`http://localhost:3000/api/canvas/${canvasId}/add/circle`, data);
+    await axios.post(`https://canvas-builder-theta.vercel.app/api/canvas/${canvasId}/add/circle`, data);
     const ctx = previewRef.current.getContext('2d');
     ctx.beginPath();
     ctx.arc(data.x, data.y, data.radius, 0, 2 * Math.PI);
@@ -36,7 +36,7 @@ function App() {
 
   const addText = async () => {
     const data = { text: 'Hello Canvas', x: 100, y: 300, fontSize: 20, color: 'green', align: 'left' };
-    await axios.post(`http://localhost:3000/api/canvas/${canvasId}/add/text`, data);
+    await axios.post(`https://canvas-builder-theta.vercel.app/api/canvas/${canvasId}/add/text`, data);
     const ctx = previewRef.current.getContext('2d');
     ctx.font = `${data.fontSize}px Arial`;
     ctx.fillStyle = data.color;
@@ -45,7 +45,7 @@ function App() {
   };
 
   const exportPdf = () => {
-    window.location.href = `http://localhost:3000/api/canvas/${canvasId}/export/pdf`;
+    window.location.href = `https://canvas-builder-theta.vercel.app/api/canvas/${canvasId}/export/pdf`;
   };
 
   return (
